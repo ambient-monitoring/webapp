@@ -1,11 +1,13 @@
 package org.ambientmonitoring.webapp.client.layout;
 
-import com.google.gwt.user.client.ui.SimplePanel;
-import org.ambientmonitoring.webapp.client.chart.SplineUpdatingExample;
+import com.google.gwt.user.client.ui.FlowPanel;
+import org.ambientmonitoring.webapp.client.chart.LiveChart;
 
-public class Layout extends SimplePanel {
+public class Layout extends FlowPanel {
 
     public Layout() {
-        setWidget(new SplineUpdatingExample());
+        add(new LiveChart(2, "Living Room - Humidity"));
+//        add(new LiveChart(1, "Bedroom 1 - Humidity"));
+//        add(new LiveChart(3, "Kitchen - Humidity"));
     }
 }
