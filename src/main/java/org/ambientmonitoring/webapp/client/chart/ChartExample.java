@@ -1,4 +1,4 @@
-package org.ambientmonitoring.webapp.client;
+package org.ambientmonitoring.webapp.client.chart;
 
 import com.google.gwt.user.client.ui.SimplePanel;
 import org.moxieapps.gwt.highcharts.client.Chart;

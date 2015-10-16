@@ -1,8 +1,10 @@
-package org.ambientmonitoring.webapp.client;
+package org.ambientmonitoring.webapp.client.entry;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.RootPanel;
+import org.ambientmonitoring.webapp.client.rpc.GreetingService;
+import org.ambientmonitoring.webapp.client.rpc.GreetingServiceAsync;
 import org.ambientmonitoring.webapp.client.layout.Layout;
 
 /**

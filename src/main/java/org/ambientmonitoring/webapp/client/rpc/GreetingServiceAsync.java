@@ -1,4 +1,4 @@
-package org.ambientmonitoring.webapp.client;
+package org.ambientmonitoring.webapp.client.rpc;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 

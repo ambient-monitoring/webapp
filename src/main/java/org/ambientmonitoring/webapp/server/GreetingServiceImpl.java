@@ -1,6 +1,6 @@
 package org.ambientmonitoring.webapp.server;
 
-import org.ambientmonitoring.webapp.client.GreetingService;
+import org.ambientmonitoring.webapp.client.rpc.GreetingService;
 import org.ambientmonitoring.webapp.shared.FieldVerifier;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
