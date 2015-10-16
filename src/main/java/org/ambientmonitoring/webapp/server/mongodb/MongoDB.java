@@ -49,23 +49,23 @@ public class MongoDB {
 
     public static class Databases {
 
-        private static String DB_LOCAL = "ambient";
+        private static String DB_AMBIENT = "ambient";
 
         private static MongoDatabase getDatabase(String db) {
             return get().getDatabase(db);
         }
 
-        public static MongoDatabase getLocal() {
-            return getDatabase(DB_LOCAL);
+        public static MongoDatabase getAmbient() {
+            return getDatabase(DB_AMBIENT);
         }
     }
 
     public static class Collections {
 
-        private static String COLLECTION_AMBIENT = "readings";
+        private static String COLLECTION_READINGS = "readings";
 
-        public static MongoCollection<Document> getAmbientCollection() {
-            return Databases.getLocal().getCollection(COLLECTION_AMBIENT);
+        public static MongoCollection<Document> getReadingsCollection() {
+            return Databases.getAmbient().getCollection(COLLECTION_READINGS);
         }
     }
 

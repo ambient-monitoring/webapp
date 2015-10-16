@@ -18,7 +18,7 @@ public class ReadingManager {
         Document docFind = new Document("id", id);
         Document docSort = new Document("timestamp", -1);
 
-        MongoCursor<Document> cursor = MongoDB.Collections.getAmbientCollection().find(docFind).sort(docSort).limit(1).iterator();
+        MongoCursor<Document> cursor = MongoDB.Collections.getReadingsCollection().find(docFind).sort(docSort).limit(1).iterator();
 
         ReadingEntity entity = null;
 
@@ -43,7 +43,7 @@ public class ReadingManager {
         Document docFind = new Document("id", id);
         Document docSort = new Document("timestamp", -1);
 
-        MongoCursor<Document> cursor = MongoDB.Collections.getAmbientCollection().find(docFind).sort(docSort).limit(count).iterator();
+        MongoCursor<Document> cursor = MongoDB.Collections.getReadingsCollection().find(docFind).sort(docSort).limit(count).iterator();
 
         List<ReadingRPC> rpcs = new ArrayList<>();
 
