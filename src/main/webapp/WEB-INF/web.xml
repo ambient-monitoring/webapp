@@ -20,7 +20,7 @@
 
     <!-- Default page to serve -->
     <welcome-file-list>
-        <welcome-file>AmbientMonitoring.html</welcome-file>
+        <welcome-file>ambientmonitoring.html</welcome-file>
     </welcome-file-list>
 
 </web-app>
