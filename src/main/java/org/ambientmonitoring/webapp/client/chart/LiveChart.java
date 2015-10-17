@@ -1,6 +1,5 @@
 package org.ambientmonitoring.webapp.client.chart;
 
-import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.i18n.client.NumberFormat;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -11,7 +10,6 @@ import org.moxieapps.gwt.highcharts.client.*;
 import org.moxieapps.gwt.highcharts.client.labels.DataLabels;
 import org.moxieapps.gwt.highcharts.client.plotOptions.BarPlotOptions;
 
-import java.util.Date;
 import java.util.List;
 
 public class LiveChart extends SimplePanel {
@@ -54,20 +52,24 @@ public class LiveChart extends SimplePanel {
 
                             @Override
                             public String format(ToolTipData toolTipData) {
-                                return "<b>" + toolTipData.getSeriesName() + "</b><br/>" +
-                                        DateTimeFormat.getFormat("yyyy-MM-dd HH:mm:ss")
-                                                .format(new Date(toolTipData.getXAsLong())) + "<br/>" +
-                                        NumberFormat.getFormat("0.00").format(toolTipData.getYAsDouble());
+                                return NumberFormat.getFormat("0.00").format(toolTipData.getYAsDouble()) + "%";
+
+//                                return "<b>" + toolTipData.getSeriesName() + "</b><br/>" +
+//                                        DateTimeFormat.getFormat("yyyy-MM-dd HH:mm:ss")
+//                                                .format(new Date(toolTipData.getXAsLong())) + "<br/>" +
+//                                        NumberFormat.getFormat("0.00").format(toolTipData.getYAsDouble());
                             }
                         })
                 );
+
+        chart.setHeight("200px");
 
         chart.getXAxis()
                 .setType(Axis.Type.DATE_TIME)
                 .setTickPixelInterval(150);
 
         chart.getYAxis()
-                .setAxisTitleText("Value")
+                .setAxisTitleText("Humidity %")
                 .setPlotLines(chart.getYAxis().createPlotLine()
                                 .setValue(0)
                                 .setWidth(1)
