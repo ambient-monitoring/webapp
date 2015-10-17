@@ -20,6 +20,7 @@ public class LiveChart extends SimplePanel {
     public LiveChart(Integer sensorId, String title) {
         this.title = title;
 
+        // todo get last 24 hour readings, not last N readings
         AmbientRPC.getLastReadings(sensorId, 100, new AsyncCallback<List<ReadingRPC>>() {
             @Override
             public void onFailure(Throwable caught) {
@@ -34,13 +35,6 @@ public class LiveChart extends SimplePanel {
     }
 
     public Chart createChart(List<ReadingRPC> readings) {
-        Highcharts.setOptions(
-                new Highcharts.Options().setGlobal(
-                        new Global()
-                                .setUseUTC(false)
-                ));
-
-
         Chart chart = new Chart()
                 .setType(Series.Type.SPLINE)
                 .setMarginRight(10)
