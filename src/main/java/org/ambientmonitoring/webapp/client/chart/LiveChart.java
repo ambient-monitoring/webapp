@@ -14,17 +14,18 @@ import java.util.List;
 
 public class LiveChart extends SimplePanel {
 
+    private final Integer sensorId;
     private final String title;
     private Long lastTimestamp;
 
     public LiveChart(Integer sensorId, String title) {
+        this.sensorId = sensorId;
         this.title = title;
 
         // todo get last 24 hour readings, not last N readings
         AmbientRPC.getLastReadings(sensorId, 100, new AsyncCallback<List<ReadingRPC>>() {
             @Override
             public void onFailure(Throwable caught) {
-
             }
 
             @Override
@@ -93,7 +94,7 @@ public class LiveChart extends SimplePanel {
     }
 
     private void loadReading(final Series series) {
-        AmbientRPC.getLastReading(2, 1l, new AsyncCallback<ReadingRPC>() {
+        AmbientRPC.getLastReading(sensorId, 1l, new AsyncCallback<ReadingRPC>() {
             @Override
             public void onFailure(Throwable caught) {
 
