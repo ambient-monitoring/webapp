@@ -16,7 +16,8 @@ public class LiveChart extends SimplePanel {
 
     private final Integer sensorId;
     private final String title;
-    private Long lastTimestamp;
+
+    private long lastTimestamp;
 
     public LiveChart(Integer sensorId, String title) {
         this.sensorId = sensorId;
@@ -103,6 +104,8 @@ public class LiveChart extends SimplePanel {
             public void onSuccess(ReadingRPC result) {
                 if (result.timestamp > lastTimestamp) {
                     series.addPoint(result.timestamp, result.humidity);
+
+                    lastTimestamp = result.timestamp;
                 }
             }
         });
