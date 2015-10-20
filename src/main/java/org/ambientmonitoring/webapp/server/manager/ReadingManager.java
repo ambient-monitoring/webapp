@@ -8,9 +8,7 @@ import org.ambientmonitoring.webapp.server.util.ServerUtil;
 import org.ambientmonitoring.webapp.shared.rpc.ReadingRPC;
 import org.bson.Document;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class ReadingManager {
 
@@ -39,11 +37,17 @@ public class ReadingManager {
         return ServerUtil.getReadingRpc(entity);
     }
 
-    public List<ReadingRPC> getLastReadings(Integer id, int count) {
-        Document docFind = new Document("id", id);
-        Document docSort = new Document("timestamp", -1);
+    public List<ReadingRPC> getLastReadings(Integer id, int hours) {
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.HOUR_OF_DAY, -hours);
+        Date since = cal.getTime();
 
-        MongoCursor<Document> cursor = MongoDB.Collections.getReadingsCollection().find(docFind).sort(docSort).limit(count).iterator();
+        Document find = new Document("id", id)
+                .append("timestamp", new Document("$gt", since.getTime()));
+
+        Document sort = new Document("timestamp", -1);
+
+        MongoCursor<Document> cursor = MongoDB.Collections.getReadingsCollection().find(find).sort(sort).iterator();
 
         List<ReadingRPC> rpcs = new ArrayList<>();
 

@@ -22,8 +22,7 @@ public class LiveChart extends SimplePanel {
         this.sensorId = sensorId;
         this.title = title;
 
-        // todo get last 24 hour readings, not last N readings
-        AmbientRPC.getLastReadings(sensorId, 100, new AsyncCallback<List<ReadingRPC>>() {
+        AmbientRPC.getLastReadings(sensorId, 2, new AsyncCallback<List<ReadingRPC>>() {
             @Override
             public void onFailure(Throwable caught) {
             }
