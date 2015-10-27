@@ -15,4 +15,6 @@ public interface AmbientService extends RemoteService {
     ReadingRPC getLastReading(Integer id, long lastTimestamp);
 
     List<ReadingRPC> getLastReadings(Integer id, int count);
+
+    List<ReadingRPC> getReadingsSince(long lastTimestamp);
 }

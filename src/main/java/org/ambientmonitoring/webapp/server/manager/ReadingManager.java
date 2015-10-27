@@ -73,4 +73,29 @@ public class ReadingManager {
 
         return rpcs;
     }
+
+    public List<ReadingRPC> getReadingsSince(long lastTimestamp) {
+        Document find = new Document("timestamp", new Document("$gt", lastTimestamp));
+        Document sort = new Document("timestamp", 1);
+
+        MongoCursor<Document> cursor = MongoDB.Collections.getReadingsCollection().find(find).sort(sort).iterator();
+
+        ReadingEntity entity = null;
+
+        List<ReadingRPC> rpcs = new ArrayList<>();
+
+        try {
+            while (cursor.hasNext()) {
+                Document obj = cursor.next();
+
+                entity = ReadingAdapter.getEntity(obj);
+
+                rpcs.add(ServerUtil.getReadingRpc(entity));
+            }
+        } finally {
+            cursor.close();
+        }
+
+        return rpcs;
+    }
 }

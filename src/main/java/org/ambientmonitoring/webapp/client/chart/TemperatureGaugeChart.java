@@ -1,6 +1,5 @@
 package org.ambientmonitoring.webapp.client.chart;
 
-import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.FlowPanel;
 import org.ambientmonitoring.webapp.client.rpc.AmbientRPC;
@@ -12,13 +11,14 @@ import org.moxieapps.gwt.highcharts.client.plotOptions.Dial;
 import org.moxieapps.gwt.highcharts.client.plotOptions.GaugePlotOptions;
 import org.moxieapps.gwt.highcharts.client.plotOptions.Pivot;
 
-public class TemperatureGaugeChart extends FlowPanel {
+public class TemperatureGaugeChart extends FlowPanel implements Setable {
 
     private final Integer sensorId;
     private final String title;
     private final boolean indoor;
 
     private long lastTimestamp;
+    private Series series;
 
     public TemperatureGaugeChart(Integer sensorId, String title, boolean indoor) {
         this.sensorId = sensorId;
@@ -118,38 +118,21 @@ public class TemperatureGaugeChart extends FlowPanel {
 //        );
         }
 
-        final Series series = chart.createSeries();
+        series = chart.createSeries();
         chart.addSeries(series
                         .setName("Temperature °C")
                         .addPoint(temperature)
         );
 
-        Timer tempTimer = new Timer() {
-            @Override
-            public void run() {
-                loadReading(series);
-            }
-        };
-        tempTimer.scheduleRepeating(4000);
-
         return chart;
     }
 
-    private void loadReading(final Series series) {
-        AmbientRPC.getLastReading(sensorId, 1l, new AsyncCallback<ReadingRPC>() {
-            @Override
-            public void onFailure(Throwable caught) {
+    public void setReading(ReadingRPC result) {
+        if (result.timestamp > lastTimestamp) {
+            series.getPoints()[0].update(result.temperature);
 
-            }
-
-            @Override
-            public void onSuccess(ReadingRPC result) {
-                if (result.timestamp > lastTimestamp) {
-                    series.getPoints()[0].update(result.temperature);
-
-                    lastTimestamp = result.timestamp;
-                }
-            }
-        });
+            lastTimestamp = result.timestamp;
+        }
     }
+
 }

@@ -6,4 +6,14 @@ public class ReadingRPC extends AbstractRPC {
     public Double temperature;
     public Double humidity;
     public Long timestamp;
+
+    @Override
+    public String toString() {
+        return "ReadingRPC{" +
+                "id=" + id +
+                ", temperature=" + temperature +
+                ", humidity=" + humidity +
+                ", timestamp=" + timestamp +
+                '}';
+    }
 }
