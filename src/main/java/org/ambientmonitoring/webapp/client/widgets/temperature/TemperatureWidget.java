@@ -1,12 +1,10 @@
 package org.ambientmonitoring.webapp.client.widgets.temperature;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.dom.client.Style;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
 import org.ambientmonitoring.webapp.client.rpc.AmbientRPC;
@@ -52,10 +50,6 @@ public class TemperatureWidget extends SimplePanel implements Updatable {
 
     private void initUi() {
         setWidget(uiBinder.createAndBindUi(this));
-
-        // todo
-        getElement().getStyle().setPadding(10, Style.Unit.PX);
-        fieldTitle.getElement().getStyle().setFontWeight(Style.FontWeight.BOLD);
     }
 
     private void loadValues() {
