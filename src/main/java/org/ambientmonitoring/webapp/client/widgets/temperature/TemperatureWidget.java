@@ -6,12 +6,14 @@ import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
 import org.ambientmonitoring.webapp.client.rpc.AmbientRPC;
 import org.ambientmonitoring.webapp.client.widgets.chart.Updatable;
 import org.ambientmonitoring.webapp.shared.rpc.ReadingRPC;
 import org.gwtbootstrap3.client.ui.Heading;
+import org.gwtbootstrap3.client.ui.Label;
 import org.gwtbootstrap3.client.ui.html.Strong;
 
 import java.util.Date;
@@ -24,9 +26,9 @@ public class TemperatureWidget extends SimplePanel implements Updatable {
     private static MyUiBinder uiBinder = GWT.create(MyUiBinder.class);
 
     @UiField
-    org.gwtbootstrap3.client.ui.Label fieldTemp;
+    Label fieldTemp;
     @UiField
-    org.gwtbootstrap3.client.ui.Label fieldHum;
+    Label fieldHum;
     @UiField
     Heading fieldTitle;
     @UiField
