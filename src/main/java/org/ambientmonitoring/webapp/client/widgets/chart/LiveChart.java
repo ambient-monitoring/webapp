@@ -1,4 +1,4 @@
-package org.ambientmonitoring.webapp.client.chart;
+package org.ambientmonitoring.webapp.client.widgets.chart;
 
 import com.google.gwt.i18n.client.NumberFormat;
 import com.google.gwt.user.client.Timer;

@@ -1,0 +1,19 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'
+             xmlns:b="urn:import:org.gwtbootstrap3.client.ui">
+
+    <b:Container fluid="true">
+        <b:Row>
+            <b:Column size="MD_12">
+                <b:Panel>
+                    <b:PanelHeader>
+                        <b:Heading ui:field="fieldHeading" size="H3" text="Sensors"/>
+                    </b:PanelHeader>
+                    <b:PanelBody>
+                        <g:SimplePanel ui:field="sensorPanel"/>
+                    </b:PanelBody>
+                </b:Panel>
+            </b:Column>
+        </b:Row>
+    </b:Container>
+</ui:UiBinder>

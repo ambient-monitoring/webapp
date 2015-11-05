@@ -1,0 +1,25 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'
+        >
+
+    <g:VerticalPanel>
+        <g:HorizontalPanel>
+            <g:Label ui:field="fieldTitle"/>
+        </g:HorizontalPanel>
+
+        <g:HorizontalPanel>
+            <g:Label text="Temperature: "/>
+            <g:Label ui:field="fieldTemp"/>
+        </g:HorizontalPanel>
+
+        <g:HorizontalPanel>
+            <g:Label text="Humidity: "/>
+            <g:Label ui:field="fieldHum"/>
+        </g:HorizontalPanel>
+
+        <g:HorizontalPanel>
+            <g:Label text="Updated: "/>
+            <g:Label ui:field="fieldUpdated"/>
+        </g:HorizontalPanel>
+    </g:VerticalPanel>
+</ui:UiBinder>

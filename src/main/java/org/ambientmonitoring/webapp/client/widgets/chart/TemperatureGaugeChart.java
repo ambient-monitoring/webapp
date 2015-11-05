@@ -1,4 +1,4 @@
-package org.ambientmonitoring.webapp.client.chart;
+package org.ambientmonitoring.webapp.client.widgets.chart;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.FlowPanel;
@@ -11,7 +11,7 @@ import org.moxieapps.gwt.highcharts.client.plotOptions.Dial;
 import org.moxieapps.gwt.highcharts.client.plotOptions.GaugePlotOptions;
 import org.moxieapps.gwt.highcharts.client.plotOptions.Pivot;
 
-public class TemperatureGaugeChart extends FlowPanel implements Setable {
+public class TemperatureGaugeChart extends FlowPanel implements Updatable {
 
     private final Integer sensorId;
     private final String title;
