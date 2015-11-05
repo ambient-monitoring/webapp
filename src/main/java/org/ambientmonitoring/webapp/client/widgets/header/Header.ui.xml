@@ -4,7 +4,7 @@
     <g:HTMLPanel>
         <b:Panel hiddenOn="XS_SM" styleName="pageTitle">
             <g:HTMLPanel>
-                <h1>Ambient Monitoring
+                <h1>ambient monitoring
                     <small>for your home</small>
                 </h1>
             </g:HTMLPanel>
