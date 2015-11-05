@@ -1,4 +1,4 @@
-package org.ambientmonitoring.webapp.server;
+package org.ambientmonitoring.webapp.server.rpc;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.google.inject.Inject;
