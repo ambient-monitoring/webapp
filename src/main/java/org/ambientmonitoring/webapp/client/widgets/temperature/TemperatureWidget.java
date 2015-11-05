@@ -6,12 +6,13 @@ import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
 import org.ambientmonitoring.webapp.client.rpc.AmbientRPC;
 import org.ambientmonitoring.webapp.client.widgets.chart.Updatable;
 import org.ambientmonitoring.webapp.shared.rpc.ReadingRPC;
+import org.gwtbootstrap3.client.ui.Heading;
+import org.gwtbootstrap3.client.ui.html.Strong;
 
 import java.util.Date;
 
@@ -23,13 +24,13 @@ public class TemperatureWidget extends SimplePanel implements Updatable {
     private static MyUiBinder uiBinder = GWT.create(MyUiBinder.class);
 
     @UiField
-    Label fieldTemp;
+    org.gwtbootstrap3.client.ui.Label fieldTemp;
     @UiField
-    Label fieldHum;
+    org.gwtbootstrap3.client.ui.Label fieldHum;
     @UiField
-    Label fieldUpdated;
+    Heading fieldTitle;
     @UiField
-    Label fieldTitle;
+    Strong fieldUpdated;
 
     private final Integer sensorId;
     private final String title;
@@ -79,7 +80,7 @@ public class TemperatureWidget extends SimplePanel implements Updatable {
         fieldTemp.setText(reading.temperature + " °C");
         fieldHum.setText(reading.humidity + "%");
         // todo show date if more than a few hours
-        fieldUpdated.setText(DateTimeFormat.getShortTimeFormat().format(new Date(reading.timestamp)));
+        fieldUpdated.setText("Updated: " + DateTimeFormat.getLongTimeFormat().format(new Date(reading.timestamp)));
 
         lastTimestamp = reading.timestamp;
     }

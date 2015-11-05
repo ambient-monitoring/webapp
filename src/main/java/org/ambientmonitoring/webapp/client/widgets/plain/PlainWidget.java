@@ -5,14 +5,16 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
 import org.ambientmonitoring.webapp.client.rpc.AmbientRPC;
 import org.ambientmonitoring.webapp.client.widgets.chart.Updatable;
 import org.ambientmonitoring.webapp.client.widgets.temperature.TemperatureWidget;
 import org.ambientmonitoring.webapp.shared.rpc.ReadingRPC;
+import org.gwtbootstrap3.client.ui.Column;
 import org.gwtbootstrap3.client.ui.Heading;
+import org.gwtbootstrap3.client.ui.Row;
+import org.gwtbootstrap3.client.ui.constants.ColumnSize;
 
 import java.util.*;
 
@@ -24,9 +26,9 @@ public class PlainWidget extends SimplePanel {
     private static MyUiBinder uiBinder = GWT.create(MyUiBinder.class);
 
     @UiField
-    SimplePanel sensorPanel;
-    @UiField
     Heading fieldHeading;
+    @UiField
+    Row fieldRows;
 
     public Map<Integer, Set<Updatable>> setableMap = new HashMap<>();
     private long lastTimestamp = new Date().getTime();
@@ -44,14 +46,10 @@ public class PlainWidget extends SimplePanel {
     }
 
     private void addSensors() {
-        FlowPanel hp = new FlowPanel();
-
-        hp.add(getTempWidget(2, "Living Room", true));
-        hp.add(getTempWidget(1, "Bedroom 1", true));
-        hp.add(getTempWidget(3, "Kitchen", true));
-        hp.add(getTempWidget(4, "Outside (NW)", false));
-
-        sensorPanel.setWidget(hp);
+        fieldRows.add(new Column(ColumnSize.MD_3, getTempWidget(2, "Living Room", true)));
+        fieldRows.add(new Column(ColumnSize.MD_3, getTempWidget(1, "Bedroom 1", true)));
+        fieldRows.add(new Column(ColumnSize.MD_3, getTempWidget(3, "Kitchen", true)));
+        fieldRows.add(new Column(ColumnSize.MD_3, getTempWidget(4, "Outside (NW)", false)));
     }
 
     private void loadValues() {
