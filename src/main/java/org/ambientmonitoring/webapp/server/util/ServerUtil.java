@@ -11,6 +11,7 @@ public class ServerUtil {
         rpc.id = entity.id;
         rpc.temperature = entity.temperature;
         rpc.humidity = entity.humidity;
+        rpc.voltage = entity.voltage;
         rpc.timestamp = entity.timestamp;
 
         return rpc;
