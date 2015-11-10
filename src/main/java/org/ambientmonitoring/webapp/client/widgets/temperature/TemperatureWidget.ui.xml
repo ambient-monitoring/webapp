@@ -3,7 +3,7 @@
              xmlns:b.html="urn:import:org.gwtbootstrap3.client.ui.html"
         >
 
-    <b:Panel type="DEFAULT">
+    <b:Panel type="DEFAULT" ui:field="panel">
         <b:PanelHeader>
             <b:Heading size="H3" ui:field="fieldTitle"/>
         </b:PanelHeader>

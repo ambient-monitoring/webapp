@@ -12,6 +12,9 @@ import org.ambientmonitoring.webapp.client.widgets.chart.Updatable;
 import org.ambientmonitoring.webapp.shared.rpc.ReadingRPC;
 import org.gwtbootstrap3.client.ui.Heading;
 import org.gwtbootstrap3.client.ui.Label;
+import org.gwtbootstrap3.client.ui.Panel;
+import org.gwtbootstrap3.client.ui.constants.LabelType;
+import org.gwtbootstrap3.client.ui.constants.PanelType;
 import org.gwtbootstrap3.client.ui.html.Strong;
 
 import java.util.Date;
@@ -33,6 +36,8 @@ public class TemperatureWidget extends SimplePanel implements Updatable {
     Heading fieldTitle;
     @UiField
     Strong fieldUpdated;
+    @UiField
+    Panel panel;
 
     private final Integer sensorId;
     private final String title;
@@ -82,6 +87,43 @@ public class TemperatureWidget extends SimplePanel implements Updatable {
         fieldUpdated.setText("Updated: " + DateTimeFormat.getLongTimeFormat().format(new Date(reading.timestamp)));
 
         lastTimestamp = reading.timestamp;
+
+        updateColors(reading);
+    }
+
+    private void updateColors(ReadingRPC reading) {
+        if (inside) {
+            // humidity
+            if (reading.humidity < 40 || reading.humidity > 60) {
+                fieldHum.setType(LabelType.WARNING);
+            }
+
+            if (reading.humidity < 20 || reading.humidity > 80) {
+                fieldHum.setType(LabelType.DANGER);
+            }
+        }
+
+        // voltage
+        if (reading.voltage != null) { // todo remove after we fix the outside sensor
+            if (reading.voltage < 3700) {
+                fieldVcc.setType(LabelType.WARNING);
+            }
+
+            if (reading.voltage < 3000) {
+                fieldVcc.setType(LabelType.DANGER);
+            }
+        }
+
+        // last update
+        long now = System.currentTimeMillis();
+
+        if (now - reading.timestamp > 900 * 1000) { // over 15 minutes
+            panel.setType(PanelType.WARNING);
+        }
+
+        if (now - reading.timestamp > 3600 * 1000) { // over 1 hour
+            panel.setType(PanelType.DANGER);
+        }
     }
 
     @Override
