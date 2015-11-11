@@ -46,19 +46,19 @@ public class PlainWidget extends SimplePanel {
     }
 
     private void addSensors() {
-        Column column = new Column(ColumnSize.XS_12, ColumnSize.SM_8, ColumnSize.MD_6, ColumnSize.LG_3);
+        Column column = new Column(ColumnSize.XS_12, ColumnSize.SM_6, ColumnSize.MD_6, ColumnSize.LG_4);
         column.add(getTempWidget(2, "Living Room", true));
         fieldRows.add(column);
 
-        column = new Column(ColumnSize.XS_12, ColumnSize.SM_8, ColumnSize.MD_6, ColumnSize.LG_3);
+        column = new Column(ColumnSize.XS_12, ColumnSize.SM_6, ColumnSize.MD_6, ColumnSize.LG_4);
         column.add(getTempWidget(1, "Bedroom 1", true));
         fieldRows.add(column);
 
-        column = new Column(ColumnSize.XS_12, ColumnSize.SM_8, ColumnSize.MD_6, ColumnSize.LG_3);
+        column = new Column(ColumnSize.XS_12, ColumnSize.SM_6, ColumnSize.MD_6, ColumnSize.LG_4);
         column.add(getTempWidget(3, "Kitchen", true));
         fieldRows.add(column);
 
-        column = new Column(ColumnSize.XS_12, ColumnSize.SM_8, ColumnSize.MD_6, ColumnSize.LG_3);
+        column = new Column(ColumnSize.XS_12, ColumnSize.SM_6, ColumnSize.MD_6, ColumnSize.LG_4);
         column.add(getTempWidget(4, "Outside (NW)", false));
         fieldRows.add(column);
     }
