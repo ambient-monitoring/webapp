@@ -104,14 +104,12 @@ public class TemperatureWidget extends SimplePanel implements Updatable {
         }
 
         // voltage
-        if (reading.voltage != null) { // todo remove after we fix the outside sensor
-            if (reading.voltage < 3700) {
-                fieldVcc.setType(LabelType.WARNING);
-            }
+        if (reading.voltage < 3700) {
+            fieldVcc.setType(LabelType.WARNING);
+        }
 
-            if (reading.voltage < 3000) {
-                fieldVcc.setType(LabelType.DANGER);
-            }
+        if (reading.voltage < 3000) {
+            fieldVcc.setType(LabelType.DANGER);
         }
 
         // last update
