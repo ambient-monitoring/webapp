@@ -87,6 +87,8 @@ public class PlainWidget extends SimplePanel {
         };
 
         timer.scheduleRepeating(4 * 1000);
+
+        // todo repeating timer that updates the warning colors for readings not received in a while
     }
 
     private void loadReadings(List<ReadingRPC> readings) {

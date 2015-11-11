@@ -38,6 +38,7 @@ public class TemperatureWidget extends SimplePanel implements Updatable {
     private final String title;
     private final boolean inside;
 
+    private ReadingRPC reading;
     private long lastTimestamp;
 
     public TemperatureWidget(Integer sensorId, String title, boolean inside) {
@@ -71,6 +72,8 @@ public class TemperatureWidget extends SimplePanel implements Updatable {
     }
 
     private void loadReading(ReadingRPC reading) {
+        this.reading = reading;
+
         if (reading.timestamp <= lastTimestamp) {
             return;
         }
@@ -83,10 +86,10 @@ public class TemperatureWidget extends SimplePanel implements Updatable {
 
         lastTimestamp = reading.timestamp;
 
-        updateColors(reading);
+        updateColors();
     }
 
-    private void updateColors(ReadingRPC reading) {
+    private void updateColors() {
         if (inside) {
             // humidity
             if (reading.humidity >= 40 && reading.humidity <= 60) {
