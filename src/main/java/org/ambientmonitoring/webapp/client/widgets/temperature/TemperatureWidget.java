@@ -81,7 +81,7 @@ public class TemperatureWidget extends SimplePanel implements Updatable {
         }
 
         fieldTemp.setText(reading.temperature + " °C");
-        fieldHum.setText(reading.humidity + "%");
+        fieldHum.setText(reading.humidity + " %");
         fieldVcc.setText(reading.voltage + " mV");
         // todo show date if more than a few hours
         fieldUpdated.setText("updated: " + DateTimeFormat.getFormat(DateTimeFormat.PredefinedFormat.TIME_LONG).format(new Date(reading.timestamp)));
