@@ -84,7 +84,7 @@ public class TemperatureWidget extends SimplePanel implements Updatable {
         fieldHum.setText(reading.humidity + "%");
         fieldVcc.setText(reading.voltage + " mV");
         // todo show date if more than a few hours
-        fieldUpdated.setText("Updated: " + DateTimeFormat.getLongTimeFormat().format(new Date(reading.timestamp)));
+        fieldUpdated.setText("updated: " + DateTimeFormat.getLongTimeFormat().format(new Date(reading.timestamp)));
 
         lastTimestamp = reading.timestamp;
 
@@ -94,6 +94,10 @@ public class TemperatureWidget extends SimplePanel implements Updatable {
     private void updateColors(ReadingRPC reading) {
         if (inside) {
             // humidity
+            if (reading.humidity >= 40 && reading.humidity <= 60) {
+                fieldHum.setType(LabelType.PRIMARY);
+            }
+
             if (reading.humidity < 40 || reading.humidity > 60) {
                 fieldHum.setType(LabelType.WARNING);
             }
@@ -104,6 +108,10 @@ public class TemperatureWidget extends SimplePanel implements Updatable {
         }
 
         // voltage
+        if (reading.voltage >= 3700) {
+            fieldVcc.setType(LabelType.PRIMARY);
+        }
+
         if (reading.voltage < 3700) {
             fieldVcc.setType(LabelType.WARNING);
         }
@@ -114,6 +122,10 @@ public class TemperatureWidget extends SimplePanel implements Updatable {
 
         // last update
         long now = System.currentTimeMillis();
+
+        if (now - reading.timestamp <= 900 * 1000) { // under 15 minutes
+            panel.setType(PanelType.DEFAULT);
+        }
 
         if (now - reading.timestamp > 900 * 1000) { // over 15 minutes
             panel.setType(PanelType.WARNING);
