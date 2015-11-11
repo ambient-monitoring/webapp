@@ -8,7 +8,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
 import org.ambientmonitoring.webapp.client.rpc.AmbientRPC;
-import org.ambientmonitoring.webapp.client.widgets.chart.Updatable;
+import org.ambientmonitoring.webapp.client.widgets.sensor.Sensor;
 import org.ambientmonitoring.webapp.shared.rpc.ReadingRPC;
 import org.gwtbootstrap3.client.ui.Heading;
 import org.gwtbootstrap3.client.ui.Label;
@@ -16,7 +16,7 @@ import org.gwtbootstrap3.client.ui.constants.LabelType;
 
 import java.util.Date;
 
-public class TemperatureWidget extends SimplePanel implements Updatable {
+public class TemperatureWidget extends SimplePanel implements Sensor {
 
     interface MyUiBinder extends UiBinder<Widget, TemperatureWidget> {
     }
@@ -85,11 +85,10 @@ public class TemperatureWidget extends SimplePanel implements Updatable {
         fieldUpdated.setText(DateTimeFormat.getFormat(DateTimeFormat.PredefinedFormat.TIME_FULL).format(new Date(reading.timestamp)));
 
         lastTimestamp = reading.timestamp;
-
-        updateColors();
     }
 
-    private void updateColors() {
+    @Override
+    public void updateColors() {
         if (inside) {
             // humidity
             if (reading.humidity >= 40 && reading.humidity <= 60) {

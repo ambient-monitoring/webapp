@@ -8,7 +8,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
 import org.ambientmonitoring.webapp.client.rpc.AmbientRPC;
-import org.ambientmonitoring.webapp.client.widgets.chart.Updatable;
+import org.ambientmonitoring.webapp.client.widgets.sensor.Sensor;
 import org.ambientmonitoring.webapp.client.widgets.temperature.TemperatureWidget;
 import org.ambientmonitoring.webapp.shared.rpc.ReadingRPC;
 import org.gwtbootstrap3.client.ui.Column;
@@ -30,7 +30,7 @@ public class PlainWidget extends SimplePanel {
     @UiField
     Row fieldRows;
 
-    public Map<Integer, Set<Updatable>> setableMap = new HashMap<>();
+    public Map<Integer, Set<Sensor>> sensorMap = new HashMap<>();
     private long lastTimestamp = new Date().getTime();
 
     public PlainWidget(List<String> params) {
@@ -92,16 +92,24 @@ public class PlainWidget extends SimplePanel {
     }
 
     private void loadReadings(List<ReadingRPC> readings) {
+        // update data
         for (ReadingRPC reading : readings) {
-            // todo
-            if (setableMap.containsKey(reading.id)) {
-                Set<Updatable> updatables = setableMap.get(reading.id);
+            if (sensorMap.containsKey(reading.id)) {
+                Set<Sensor> sensors = sensorMap.get(reading.id);
 
-                for (Updatable updatable : updatables) {
-                    updatable.setReading(reading);
+                for (Sensor sensor : sensors) {
+                    sensor.setReading(reading);
                 }
             }
-            GWT.log("reading = " + reading.toString());
+        }
+
+        // update colors
+        // we update every sensor because we need to signal lack of data, not only out of range data
+        // e.g.: no reading received for a while
+        for (Set<Sensor> sensors : sensorMap.values()) {
+            for (Sensor sensor : sensors) {
+                sensor.updateColors();
+            }
         }
     }
 
@@ -113,14 +121,14 @@ public class PlainWidget extends SimplePanel {
         return widget;
     }
 
-    private void addToSetables(Integer sensorId, Updatable updatable) {
-        Set<Updatable> updatables = new HashSet<>();
-        updatables.add(updatable);
+    private void addToSetables(Integer sensorId, Sensor sensor) {
+        Set<Sensor> sensors = new HashSet<>();
+        sensors.add(sensor);
 
-        if (setableMap.containsKey(sensorId)) {
-            setableMap.get(sensorId).addAll(updatables);
+        if (sensorMap.containsKey(sensorId)) {
+            sensorMap.get(sensorId).addAll(sensors);
         } else {
-            setableMap.put(sensorId, updatables);
+            sensorMap.put(sensorId, sensors);
         }
     }
 
