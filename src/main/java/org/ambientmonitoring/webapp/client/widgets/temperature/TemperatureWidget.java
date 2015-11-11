@@ -12,10 +12,7 @@ import org.ambientmonitoring.webapp.client.widgets.chart.Updatable;
 import org.ambientmonitoring.webapp.shared.rpc.ReadingRPC;
 import org.gwtbootstrap3.client.ui.Heading;
 import org.gwtbootstrap3.client.ui.Label;
-import org.gwtbootstrap3.client.ui.Panel;
 import org.gwtbootstrap3.client.ui.constants.LabelType;
-import org.gwtbootstrap3.client.ui.constants.PanelType;
-import org.gwtbootstrap3.client.ui.html.Strong;
 
 import java.util.Date;
 
@@ -35,9 +32,7 @@ public class TemperatureWidget extends SimplePanel implements Updatable {
     @UiField
     Heading fieldTitle;
     @UiField
-    Strong fieldUpdated;
-    @UiField
-    Panel panel;
+    Label fieldUpdated;
 
     private final Integer sensorId;
     private final String title;
@@ -84,7 +79,7 @@ public class TemperatureWidget extends SimplePanel implements Updatable {
         fieldHum.setText(reading.humidity + " %");
         fieldVcc.setText(reading.voltage + " mV");
         // todo show date if more than a few hours
-        fieldUpdated.setText("updated: " + DateTimeFormat.getFormat(DateTimeFormat.PredefinedFormat.TIME_LONG).format(new Date(reading.timestamp)));
+        fieldUpdated.setText(DateTimeFormat.getFormat(DateTimeFormat.PredefinedFormat.TIME_FULL).format(new Date(reading.timestamp)));
 
         lastTimestamp = reading.timestamp;
 
@@ -124,15 +119,15 @@ public class TemperatureWidget extends SimplePanel implements Updatable {
         long now = System.currentTimeMillis();
 
         if (now - reading.timestamp <= 900 * 1000) { // under 15 minutes
-            panel.setType(PanelType.DEFAULT);
+            fieldUpdated.setType(LabelType.DEFAULT);
         }
 
         if (now - reading.timestamp > 900 * 1000) { // over 15 minutes
-            panel.setType(PanelType.WARNING);
+            fieldUpdated.setType(LabelType.WARNING);
         }
 
         if (now - reading.timestamp > 3600 * 1000) { // over 1 hour
-            panel.setType(PanelType.DANGER);
+            fieldUpdated.setType(LabelType.DANGER);
         }
     }
 
