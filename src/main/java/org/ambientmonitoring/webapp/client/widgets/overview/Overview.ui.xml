@@ -5,7 +5,7 @@
         <b:Row>
             <b:Column size="MD_12">
                 <b:Container fluid="true">
-                    <b:Row ui:field="fieldRows">
+                    <b:Row ui:field="fieldRow">
                     </b:Row>
                 </b:Container>
             </b:Column>
