@@ -1,11 +1,12 @@
 <ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
-             xmlns:b="urn:import:org.gwtbootstrap3.client.ui" xmlns:g="urn:import:com.google.gwt.user.client.ui">
+             xmlns:b="urn:import:org.gwtbootstrap3.client.ui">
 
     <b:Container fluid="true">
         <b:Row>
             <b:Column size="MD_12">
                 <b:Container fluid="true">
-                    <g:SimplePanel ui:field="panel"/>
+                    <b:Row ui:field="fieldRows">
+                    </b:Row>
                 </b:Container>
             </b:Column>
         </b:Row>

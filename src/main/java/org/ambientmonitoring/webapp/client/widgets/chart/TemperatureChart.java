@@ -1,6 +1,5 @@
 package org.ambientmonitoring.webapp.client.widgets.chart;
 
-import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.SimplePanel;
 import org.ambientmonitoring.webapp.client.rpc.AmbientRPC;
@@ -16,8 +15,10 @@ import java.util.Map;
 public class TemperatureChart extends SimplePanel {
 
     private Map<Integer, Series> seriesMap = new HashMap<>();
+    private int sensorId;
 
-    public TemperatureChart() {
+    public TemperatureChart(int sensorId) {
+        this.sensorId = sensorId;
         initUi();
 
         loadValues();
@@ -31,7 +32,7 @@ public class TemperatureChart extends SimplePanel {
         Chart chart = new Chart()
                 .setType(Series.Type.SPLINE)
                 .setMarginRight(10)
-                .setChartTitleText("Temperature")
+                .setChartTitleText("Temperature " + sensorId)
                 .setBarPlotOptions(new BarPlotOptions().setDataLabels(new DataLabels().setEnabled(true)))
                 .setLegend(new Legend().setEnabled(false))
                 .setCredits(new Credits().setEnabled(false))
@@ -44,8 +45,6 @@ public class TemperatureChart extends SimplePanel {
 //                        })
 //                );
                 ;
-
-//        chart.setHeight("200px");
 
         chart.getXAxis()
                 .setType(Axis.Type.DATE_TIME)
@@ -65,7 +64,7 @@ public class TemperatureChart extends SimplePanel {
     }
 
     private void initSeries(Chart chart) {
-        for (int i = 1; i < 4; i++) {
+        for (int i = 1; i < 5; i++) {
             Series series = chart.createSeries().setName("Sensor " + i);
             chart.addSeries(series);
 
@@ -74,10 +73,10 @@ public class TemperatureChart extends SimplePanel {
     }
 
     private void loadValues() {
-        loadHistory(1);
+        loadHistory();
     }
 
-    private void loadHistory(final int sensorId) {
+    private void loadHistory() {
 
         AmbientRPC.getLastReadings(sensorId, 1, new AsyncCallback<List<ReadingRPC>>() {
             @Override
