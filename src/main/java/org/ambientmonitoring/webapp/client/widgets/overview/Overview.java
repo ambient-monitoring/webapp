@@ -1,4 +1,4 @@
-package org.ambientmonitoring.webapp.client.widgets.plain;
+package org.ambientmonitoring.webapp.client.widgets.overview;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -12,28 +12,25 @@ import org.ambientmonitoring.webapp.client.widgets.sensor.Sensor;
 import org.ambientmonitoring.webapp.client.widgets.temperature.TemperatureWidget;
 import org.ambientmonitoring.webapp.shared.rpc.ReadingRPC;
 import org.gwtbootstrap3.client.ui.Column;
-import org.gwtbootstrap3.client.ui.Heading;
 import org.gwtbootstrap3.client.ui.Row;
 import org.gwtbootstrap3.client.ui.constants.ColumnSize;
 
 import java.util.*;
 
-public class PlainWidget extends SimplePanel {
+public class Overview extends SimplePanel {
 
-    interface MyUiBinder extends UiBinder<Widget, PlainWidget> {
+    interface MyUiBinder extends UiBinder<Widget, Overview> {
     }
 
     private static MyUiBinder uiBinder = GWT.create(MyUiBinder.class);
 
-    @UiField
-    Heading fieldHeading;
     @UiField
     Row fieldRows;
 
     public Map<Integer, Set<Sensor>> sensorMap = new HashMap<>();
     private long lastTimestamp = new Date().getTime();
 
-    public PlainWidget(List<String> params) {
+    public Overview(List<String> params) {
         initUi();
 
         loadValues();

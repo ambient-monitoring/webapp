@@ -9,6 +9,19 @@
                 </h1>
             </g:HTMLPanel>
         </b:Panel>
+
+        <b:Navbar>
+            <b:NavbarHeader>
+                <b:NavbarCollapseButton dataTarget="#navbar-collapse"/>
+            </b:NavbarHeader>
+
+            <b:NavbarCollapse b:id="navbar-collapse">
+                <b:NavbarNav>
+                    <b:AnchorListItem text="Overview" targetHistoryToken="overview"/>
+                    <b:AnchorListItem text="Graph" targetHistoryToken="graph"/>
+                </b:NavbarNav>
+            </b:NavbarCollapse>
+        </b:Navbar>
     </g:HTMLPanel>
 
 </ui:UiBinder>

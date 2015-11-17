@@ -1,8 +1,6 @@
 package org.ambientmonitoring.webapp.client.widgets.content;
 
-import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.ui.SimplePanel;
-import org.ambientmonitoring.webapp.client.widgets.plain.PlainFactory;
 
 public class Content extends SimplePanel {
 
@@ -15,7 +13,6 @@ public class Content extends SimplePanel {
     }
 
     private void initUi() {
-        History.newItem(PlainFactory.getInstance().getComponentId()); // todo
     }
 
     public static Content getInstance() {

@@ -5,7 +5,8 @@ public class SharedConstants {
     public static final String DOMAIN_BASE = "http://ambient.emilburzo.com";
 
     public static class Components {
-        public static final String PLAIN = "plain";
+        public static final String OVERVIEW = "overview";
+        public static final String GRAPH = "graph";
     }
 
 }

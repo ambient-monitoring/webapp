@@ -6,7 +6,8 @@ import com.google.gwt.user.client.ui.RootPanel;
 import org.ambientmonitoring.webapp.client.components.Components;
 import org.ambientmonitoring.webapp.client.history.HistoryValueChangeHandler;
 import org.ambientmonitoring.webapp.client.layout.Layout;
-import org.ambientmonitoring.webapp.client.widgets.plain.PlainFactory;
+import org.ambientmonitoring.webapp.client.widgets.graph.GraphFactory;
+import org.ambientmonitoring.webapp.client.widgets.overview.OverviewFactory;
 import org.moxieapps.gwt.highcharts.client.Global;
 import org.moxieapps.gwt.highcharts.client.Highcharts;
 
@@ -28,12 +29,18 @@ public class AmbientMonitoring implements EntryPoint {
         // register components
         registerComponents();
 
+        // if accessed by the main page, redirect to the overview page
+        if (History.getToken().isEmpty()) {
+            History.newItem(OverviewFactory.getInstance().getComponentId(), false);
+        }
+
         // for direct URLs, fire our current history state
         History.fireCurrentHistoryState();
     }
 
     private void registerComponents() {
-        Components.getInstance().register(PlainFactory.getInstance());
+        Components.getInstance().register(OverviewFactory.getInstance());
+        Components.getInstance().register(GraphFactory.getInstance());
     }
 
     private void doHighchartSettings() {

@@ -72,8 +72,7 @@ public class LiveChart extends SimplePanel {
                 );
 
         final Series series = chart.createSeries();
-        chart.addSeries(series.setName("Humidity %")
-        );
+        chart.addSeries(series.setName("Humidity %"));
 
         // Generate an array of random data
         for (ReadingRPC reading : readings) {
