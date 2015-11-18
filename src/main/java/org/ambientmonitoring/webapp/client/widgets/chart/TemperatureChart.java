@@ -19,6 +19,7 @@ public class TemperatureChart extends SimplePanel {
     private Map<Integer, Series> seriesMap = new HashMap<>();
     private Chart chart;
     private long lastTimestamp;
+    private Timer timer;
 
     public TemperatureChart() {
         initUi();
@@ -125,7 +126,7 @@ public class TemperatureChart extends SimplePanel {
     }
 
     private void loadNewValues() {
-        Timer timer = new Timer() {
+        timer = new Timer() {
             @Override
             public void run() {
                 loadValues(lastTimestamp, true);
@@ -135,5 +136,23 @@ public class TemperatureChart extends SimplePanel {
         // todo some main thread that dispatches to all widgets
         // todo start/stop on bind/unbind
         timer.scheduleRepeating(30 * 1000);
+    }
+
+    @Override
+    protected void onAttach() {
+        super.onAttach();
+
+        if (!timer.isRunning()) {
+            timer.run();
+        }
+    }
+
+    @Override
+    protected void onDetach() {
+        super.onDetach();
+
+        if (timer.isRunning()) {
+            timer.cancel();
+        }
     }
 }

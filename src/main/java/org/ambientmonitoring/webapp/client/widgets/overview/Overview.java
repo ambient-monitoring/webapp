@@ -30,6 +30,8 @@ public class Overview extends SimplePanel {
     public Map<Integer, Set<Sensor>> sensorMap = new HashMap<>();
     private long lastTimestamp = new Date().getTime();
 
+    private Timer timer;
+
     public Overview(List<String> params) {
         initUi();
 
@@ -61,7 +63,7 @@ public class Overview extends SimplePanel {
     }
 
     private void loadValues() {
-        Timer timer = new Timer() {
+        timer = new Timer() {
 
             @Override
             public void run() {
@@ -86,6 +88,24 @@ public class Overview extends SimplePanel {
         timer.scheduleRepeating(4 * 1000);
 
         // todo repeating timer that updates the warning colors for readings not received in a while
+    }
+
+    @Override
+    protected void onAttach() {
+        super.onAttach();
+
+        if (!timer.isRunning()) {
+            timer.run();
+        }
+    }
+
+    @Override
+    protected void onDetach() {
+        super.onDetach();
+
+        if (timer.isRunning()) {
+            timer.cancel();
+        }
     }
 
     private void loadReadings(List<ReadingRPC> readings) {

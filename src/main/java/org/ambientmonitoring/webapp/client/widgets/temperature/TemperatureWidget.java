@@ -53,11 +53,11 @@ public class TemperatureWidget extends SimplePanel implements Sensor {
 
     private void initUi() {
         setWidget(uiBinder.createAndBindUi(this));
+
+        fieldTitle.setText(title);
     }
 
     private void loadValues() {
-        fieldTitle.setText(title);
-
         AmbientRPC.getLastReading(sensorId, 1l, new AsyncCallback<ReadingRPC>() {
             @Override
             public void onFailure(Throwable caught) {
@@ -137,5 +137,4 @@ public class TemperatureWidget extends SimplePanel implements Sensor {
     public void setReading(ReadingRPC reading) {
         loadReading(reading);
     }
-
 }
