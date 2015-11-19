@@ -34,7 +34,7 @@ public class MongoDB {
                 .build();
 
         List<ServerAddress> servers = Arrays.asList(
-                new ServerAddress("mongodb", 27017));
+                new ServerAddress("ambient", 27017));
 
         // or, to connect to a replica set, with auto-discovery of the primary, supply a seed list of members
         client = new MongoClient(servers, opts);
