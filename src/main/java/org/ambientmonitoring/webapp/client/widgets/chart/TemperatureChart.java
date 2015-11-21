@@ -2,7 +2,6 @@ package org.ambientmonitoring.webapp.client.widgets.chart;
 
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.SimplePanel;
 import org.ambientmonitoring.webapp.client.rpc.AmbientRPC;
 import org.ambientmonitoring.webapp.shared.rpc.ReadingRPC;
 import org.moxieapps.gwt.highcharts.client.*;
@@ -14,7 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class TemperatureChart extends SimplePanel {
+public class TemperatureChart extends AbstractChart {
 
     private Map<Integer, Series> seriesMap = new HashMap<>();
     private Chart chart;
@@ -48,8 +47,7 @@ public class TemperatureChart extends SimplePanel {
                 .setBarPlotOptions(new BarPlotOptions().setDataLabels(new DataLabels().setEnabled(false)))
                 .setLegend(new Legend().setEnabled(true))
                 .setCredits(new Credits().setEnabled(false))
-                .setToolTip(new ToolTip().setEnabled(false))
-                ;
+                .setToolTip(new ToolTip().setEnabled(false));
 
         // X axis
         chart.getXAxis().setType(Axis.Type.DATE_TIME);
@@ -57,11 +55,7 @@ public class TemperatureChart extends SimplePanel {
         // Y axis
         chart.getYAxis()
                 .setAxisTitleText("Temperature °C")
-                .setPlotLines(chart.getYAxis().createPlotLine()
-                                .setValue(0)
-                                .setWidth(1)
-                                .setColor("#808080")
-                );
+                .setPlotLines(chart.getYAxis().createPlotLine());
 
         // series
         initSeries(chart);
@@ -69,27 +63,27 @@ public class TemperatureChart extends SimplePanel {
         return chart;
     }
 
-    private void initSeries(Chart chart) {
+    protected void initSeries(Chart chart) {
         // todo load from DB
 
         // id 1 - bedroom 1
         Series series = chart.createSeries().setName("Bedroom 1");
-        chart.addSeries(series);
+        chart.addSeries(setSeriesOpts(series));
         seriesMap.put(1, series);
 
         // id 2 - living room
         series = chart.createSeries().setName("Living Room");
-        chart.addSeries(series);
+        chart.addSeries(setSeriesOpts(series));
         seriesMap.put(2, series);
 
         // id 3 - kitchen
         series = chart.createSeries().setName("Kitchen");
-        chart.addSeries(series);
+        chart.addSeries(setSeriesOpts(series));
         seriesMap.put(3, series);
 
         // id 4 - outside
         series = chart.createSeries().setName("Outside (NW)");
-        chart.addSeries(series);
+        chart.addSeries(setSeriesOpts(series));
         seriesMap.put(4, series);
     }
 
