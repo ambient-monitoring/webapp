@@ -19,8 +19,11 @@ public class HumidityChart extends AbstractChart {
     private Chart chart;
     private long lastTimestamp;
     private Timer timer;
+    private boolean indoor;
 
-    public HumidityChart() {
+    public HumidityChart(boolean indoor) {
+        this.indoor = indoor;
+
         initUi();
 
         // todo proper server side call
@@ -66,25 +69,29 @@ public class HumidityChart extends AbstractChart {
     protected void initSeries(Chart chart) {
         // todo load from DB
 
-        // id 1 - bedroom 1
-        Series series = chart.createSeries().setName("Bedroom 1");
-        chart.addSeries(setSeriesOpts(series));
-        seriesMap.put(1, series);
+        Series series = null;
 
-        // id 2 - living room
-        series = chart.createSeries().setName("Living Room");
-        chart.addSeries(setSeriesOpts(series));
-        seriesMap.put(2, series);
+        if (indoor) {
+            // id 1 - bedroom 1
+            series = chart.createSeries().setName("Bedroom 1");
+            chart.addSeries(setSeriesOpts(series));
+            seriesMap.put(1, series);
 
-        // id 3 - kitchen
-        series = chart.createSeries().setName("Kitchen");
-        chart.addSeries(setSeriesOpts(series));
-        seriesMap.put(3, series);
+            // id 2 - living room
+            series = chart.createSeries().setName("Living Room");
+            chart.addSeries(setSeriesOpts(series));
+            seriesMap.put(2, series);
 
-        // id 4 - outside
-        series = chart.createSeries().setName("Outside (NW)");
-        chart.addSeries(setSeriesOpts(series));
-        seriesMap.put(4, series);
+            // id 3 - kitchen
+            series = chart.createSeries().setName("Kitchen");
+            chart.addSeries(setSeriesOpts(series));
+            seriesMap.put(3, series);
+        } else {
+            // id 4 - outside
+            series = chart.createSeries().setName("Outside (NW)");
+            chart.addSeries(setSeriesOpts(series));
+            seriesMap.put(4, series);
+        }
     }
 
     private void loadValues(long ts, final boolean animate) {
@@ -104,6 +111,10 @@ public class HumidityChart extends AbstractChart {
     private void loadFromReadings(List<ReadingRPC> readings, boolean animate) {
         for (ReadingRPC reading : readings) {
             Series series = seriesMap.get(reading.id);
+
+            if (series == null) {
+                continue;
+            }
 
             if (animate) {
                 series.addPoint(reading.timestamp, reading.humidity);
@@ -128,7 +139,6 @@ public class HumidityChart extends AbstractChart {
         };
 
         // todo some main thread that dispatches to all widgets
-        // todo start/stop on bind/unbind
         timer.scheduleRepeating(30 * 1000);
     }
 

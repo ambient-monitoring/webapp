@@ -1,4 +1,4 @@
-package org.ambientmonitoring.webapp.client.widgets.graph;
+package org.ambientmonitoring.webapp.client.widgets.indoor;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -13,9 +13,9 @@ import org.gwtbootstrap3.client.ui.constants.ColumnSize;
 
 import java.util.List;
 
-public class Graph extends SimplePanel {
+public class Indoor extends SimplePanel {
 
-    interface MyUiBinder extends UiBinder<Widget, Graph> {
+    interface MyUiBinder extends UiBinder<Widget, Indoor> {
     }
 
     private static MyUiBinder uiBinder = GWT.create(MyUiBinder.class);
@@ -23,7 +23,7 @@ public class Graph extends SimplePanel {
     @UiField
     Row fieldRow;
 
-    public Graph(List<String> params) {
+    public Indoor(List<String> params) {
         initUi();
     }
 
@@ -31,11 +31,11 @@ public class Graph extends SimplePanel {
         setWidget(uiBinder.createAndBindUi(this));
 
         Column column = new Column(ColumnSize.XS_12, ColumnSize.SM_12, ColumnSize.MD_6, ColumnSize.LG_6);
-        column.add(new TemperatureChart());
+        column.add(new TemperatureChart(true));
         fieldRow.add(column);
 
         column = new Column(ColumnSize.XS_12, ColumnSize.SM_12, ColumnSize.MD_6, ColumnSize.LG_6);
-        column.add(new HumidityChart());
+        column.add(new HumidityChart(true));
         fieldRow.add(column);
 
     }

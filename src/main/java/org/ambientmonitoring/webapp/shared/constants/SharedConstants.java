@@ -6,7 +6,8 @@ public class SharedConstants {
 
     public static class Components {
         public static final String OVERVIEW = "overview";
-        public static final String GRAPH = "graph";
+        public static final String INDOOR = "indoor";
+        public static final String OUTDOOR = "outdoor";
     }
 
 }

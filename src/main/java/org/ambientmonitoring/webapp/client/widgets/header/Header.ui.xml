@@ -18,7 +18,8 @@
             <b:NavbarCollapse b:id="navbar-collapse">
                 <b:NavbarNav>
                     <b:AnchorListItem text="Overview" targetHistoryToken="overview"/>
-                    <b:AnchorListItem text="Graph" targetHistoryToken="graph"/>
+                    <b:AnchorListItem text="Indoor" targetHistoryToken="indoor"/>
+                    <b:AnchorListItem text="Outdoor" targetHistoryToken="outdoor"/>
                 </b:NavbarNav>
             </b:NavbarCollapse>
         </b:Navbar>

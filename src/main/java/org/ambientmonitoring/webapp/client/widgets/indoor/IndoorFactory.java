@@ -1,4 +1,4 @@
-package org.ambientmonitoring.webapp.client.widgets.graph;
+package org.ambientmonitoring.webapp.client.widgets.indoor;
 
 import com.google.gwt.user.client.ui.Widget;
 import org.ambientmonitoring.webapp.client.components.ComponentFactory;
@@ -6,23 +6,23 @@ import org.ambientmonitoring.webapp.shared.constants.SharedConstants;
 
 import java.util.List;
 
-public class GraphFactory extends ComponentFactory {
+public class IndoorFactory extends ComponentFactory {
 
-    private static GraphFactory instance;
+    private static IndoorFactory instance;
 
     @Override
     public String getComponentId() {
-        return SharedConstants.Components.GRAPH;
+        return SharedConstants.Components.INDOOR;
     }
 
     @Override
     public Widget getWidget(List<String> params) {
-        return new Graph(params);
+        return new Indoor(params);
     }
 
-    public static GraphFactory getInstance() {
+    public static IndoorFactory getInstance() {
         if (instance == null) {
-            instance = new GraphFactory();
+            instance = new IndoorFactory();
         }
 
         return instance;

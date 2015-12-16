@@ -6,7 +6,8 @@ import com.google.gwt.user.client.ui.RootPanel;
 import org.ambientmonitoring.webapp.client.components.Components;
 import org.ambientmonitoring.webapp.client.history.HistoryValueChangeHandler;
 import org.ambientmonitoring.webapp.client.layout.Layout;
-import org.ambientmonitoring.webapp.client.widgets.graph.GraphFactory;
+import org.ambientmonitoring.webapp.client.widgets.indoor.IndoorFactory;
+import org.ambientmonitoring.webapp.client.widgets.outdoor.OutdoorFactory;
 import org.ambientmonitoring.webapp.client.widgets.overview.OverviewFactory;
 import org.moxieapps.gwt.highcharts.client.Global;
 import org.moxieapps.gwt.highcharts.client.Highcharts;
@@ -40,7 +41,8 @@ public class AmbientMonitoring implements EntryPoint {
 
     private void registerComponents() {
         Components.getInstance().register(OverviewFactory.getInstance());
-        Components.getInstance().register(GraphFactory.getInstance());
+        Components.getInstance().register(IndoorFactory.getInstance());
+        Components.getInstance().register(OutdoorFactory.getInstance());
     }
 
     private void doHighchartSettings() {
