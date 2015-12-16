@@ -18,6 +18,23 @@ import java.util.Date;
 
 public class TemperatureWidget extends SimplePanel implements Sensor {
 
+    private static final int HUMIDITY_SAFE_MIN = 40;
+    private static final int HUMIDITY_SAFE_MAX = 60;
+
+    private static final int HUMIDITY_WARNING_MIN = 40;
+    private static final int HUMIDITY_WARNING_MAX = 60;
+
+    private static final int HUMIDITY_DANGER_MIN = 20;
+    private static final int HUMIDITY_DANGER_MAX = 80;
+
+    private static final int VOLTAGE_SAFE = 3700;
+    private static final int VOLTAGE_WARNING = 3700;
+    private static final int VOLTAGE_DANGER = 3000;
+
+    private static final long TIMESTAMP_SAFE = 900 * 1000; // 15 minutes
+    private static final long TIMESTAMP_DANGER = 3600 * 1000; // 1 hour
+
+
     interface MyUiBinder extends UiBinder<Widget, TemperatureWidget> {
     }
 
@@ -93,44 +110,44 @@ public class TemperatureWidget extends SimplePanel implements Sensor {
     public void updateColors() {
         if (inside) {
             // humidity
-            if (reading.humidity >= 40 && reading.humidity <= 60) {
+            if (reading.humidity >= HUMIDITY_SAFE_MIN && reading.humidity <= HUMIDITY_SAFE_MAX) {
                 fieldHum.setType(LabelType.PRIMARY);
             }
 
-            if (reading.humidity < 40 || reading.humidity > 60) {
+            if (reading.humidity < HUMIDITY_WARNING_MIN || reading.humidity > HUMIDITY_WARNING_MAX) {
                 fieldHum.setType(LabelType.WARNING);
             }
 
-            if (reading.humidity < 20 || reading.humidity > 80) {
+            if (reading.humidity < HUMIDITY_DANGER_MIN || reading.humidity > HUMIDITY_DANGER_MAX) {
                 fieldHum.setType(LabelType.DANGER);
             }
         }
 
         // voltage
-        if (reading.voltage >= 3700) {
+        if (reading.voltage >= VOLTAGE_SAFE) {
             fieldVcc.setType(LabelType.PRIMARY);
         }
 
-        if (reading.voltage < 3700) {
+        if (reading.voltage < VOLTAGE_WARNING) {
             fieldVcc.setType(LabelType.WARNING);
         }
 
-        if (reading.voltage < 3000) {
+        if (reading.voltage < VOLTAGE_DANGER) {
             fieldVcc.setType(LabelType.DANGER);
         }
 
         // last update
         long now = System.currentTimeMillis();
 
-        if (now - reading.timestamp <= 900 * 1000) { // under 15 minutes
+        if (now - reading.timestamp <= TIMESTAMP_SAFE) { // under 15 minutes
             fieldUpdated.setType(LabelType.DEFAULT);
         }
 
-        if (now - reading.timestamp > 900 * 1000) { // over 15 minutes
+        if (now - reading.timestamp > TIMESTAMP_SAFE) { // over 15 minutes
             fieldUpdated.setType(LabelType.WARNING);
         }
 
-        if (now - reading.timestamp > 3600 * 1000) { // over 1 hour
+        if (now - reading.timestamp > TIMESTAMP_DANGER) { // over 1 hour
             fieldUpdated.setType(LabelType.DANGER);
         }
     }
