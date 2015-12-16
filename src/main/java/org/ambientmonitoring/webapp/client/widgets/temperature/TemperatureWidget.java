@@ -67,6 +67,8 @@ public class TemperatureWidget extends SimplePanel implements Sensor {
             @Override
             public void onSuccess(ReadingRPC result) {
                 loadReading(result);
+
+                updateColors();
             }
         });
     }
