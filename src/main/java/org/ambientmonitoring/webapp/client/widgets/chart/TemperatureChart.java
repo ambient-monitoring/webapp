@@ -72,8 +72,8 @@ public class TemperatureChart extends AbstractChart {
         Series series = null;
 
         if (indoor) {
-            // id 1 - bedroom 1
-            series = chart.createSeries().setName("Bedroom 1");
+            // id 1 - bedroom
+            series = chart.createSeries().setName("Bedroom");
             chart.addSeries(setSeriesOpts(series));
             seriesMap.put(1, series);
 
@@ -88,7 +88,7 @@ public class TemperatureChart extends AbstractChart {
             seriesMap.put(3, series);
         } else {
             // id 4 - outside
-            series = chart.createSeries().setName("Outside (NW)");
+            series = chart.createSeries().setName("Outside");
             chart.addSeries(setSeriesOpts(series));
             seriesMap.put(4, series);
         }

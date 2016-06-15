@@ -45,12 +45,14 @@ public class Overview extends SimplePanel {
     }
 
     private void addSensors() {
+        // todo load from db dynamically
+
         Column column = new Column(ColumnSize.XS_12, ColumnSize.SM_6, ColumnSize.MD_6, ColumnSize.LG_4);
         column.add(getTempWidget(2, "Living Room", true));
         fieldRow.add(column);
 
         column = new Column(ColumnSize.XS_12, ColumnSize.SM_6, ColumnSize.MD_6, ColumnSize.LG_4);
-        column.add(getTempWidget(1, "Bedroom 1", true));
+        column.add(getTempWidget(1, "Bedroom", true));
         fieldRow.add(column);
 
         column = new Column(ColumnSize.XS_12, ColumnSize.SM_6, ColumnSize.MD_6, ColumnSize.LG_4);
@@ -58,7 +60,7 @@ public class Overview extends SimplePanel {
         fieldRow.add(column);
 
         column = new Column(ColumnSize.XS_12, ColumnSize.SM_6, ColumnSize.MD_6, ColumnSize.LG_4);
-        column.add(getTempWidget(4, "Outside (NW)", false));
+        column.add(getTempWidget(4, "Outside", false));
         fieldRow.add(column);
     }
 
