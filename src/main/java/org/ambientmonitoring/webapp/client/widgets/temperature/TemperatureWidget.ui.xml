@@ -30,19 +30,19 @@
 
                 <b:Row>
                     <b:Column size="XS_6,SM_6,MD_6,LG_6">
-                        <b.html:Paragraph text="Signal:"/>
+                        <b.html:Paragraph text="Voltage:"/>
                     </b:Column>
                     <b:Column size="XS_6,SM_6,MD_6,LG_6">
-                        <b:Label ui:field="fieldSignal" type="PRIMARY"/>
+                        <b:Label ui:field="fieldVcc" type="PRIMARY"/>
                     </b:Column>
                 </b:Row>
 
                 <b:Row>
                     <b:Column size="XS_6,SM_6,MD_6,LG_6">
-                        <b.html:Paragraph text="Voltage:"/>
+                        <b.html:Paragraph text="Signal:"/>
                     </b:Column>
                     <b:Column size="XS_6,SM_6,MD_6,LG_6">
-                        <b:Label ui:field="fieldVcc" type="PRIMARY"/>
+                        <b:Label ui:field="fieldSignal" type="PRIMARY"/>
                     </b:Column>
                 </b:Row>
             </b:Container>
