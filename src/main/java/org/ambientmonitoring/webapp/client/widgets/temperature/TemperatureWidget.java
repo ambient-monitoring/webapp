@@ -50,6 +50,8 @@ public class TemperatureWidget extends SimplePanel implements Sensor {
     Heading fieldTitle;
     @UiField
     Label fieldUpdated;
+    @UiField
+    Label fieldSignal;
 
     private final Integer sensorId;
     private final String title;
@@ -100,6 +102,7 @@ public class TemperatureWidget extends SimplePanel implements Sensor {
         fieldTemp.setText(reading.temperature + " °C");
         fieldHum.setText(reading.humidity + " %");
         fieldVcc.setText(reading.voltage + " mV");
+        fieldSignal.setText(reading.signal + " %");
         // todo show date if more than a few hours
         fieldUpdated.setText(DateTimeFormat.getFormat(DateTimeFormat.PredefinedFormat.TIME_FULL).format(new Date(reading.timestamp)));
 

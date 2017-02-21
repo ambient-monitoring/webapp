@@ -12,11 +12,55 @@ import java.util.*;
 
 public class ReadingManager {
 
+    private Integer getSignal(Integer id) {
+        Document docFind = new Document("id", id);
+        Document docSort = new Document("timestamp", -1);
+
+        MongoCursor<Document> cursor = MongoDB.Collections.getReadingsCollection()
+                .find(docFind)
+                .sort(docSort)
+                .limit(100)
+                .iterator();
+
+        List<ReadingEntity> entities = new ArrayList<>();
+
+        try {
+            while (cursor.hasNext()) {
+                Document obj = cursor.next();
+
+                entities.add(ReadingAdapter.getEntity(obj));
+            }
+        } finally {
+            cursor.close();
+        }
+
+        int signal = 100;
+
+        for (int i = 1; i < entities.size(); i++) {
+            int curr = entities.get(i - 1).counter;
+            int prev = entities.get(i).counter;
+
+            int diff = curr - prev;
+
+            if (diff < 0) {
+                continue; // counter wrap-around
+            }
+
+            signal -= diff - 1;
+        }
+
+        return signal;
+    }
+
     public ReadingRPC getLastReading(Integer id, long lastTimestamp) {
         Document docFind = new Document("id", id);
         Document docSort = new Document("timestamp", -1);
 
-        MongoCursor<Document> cursor = MongoDB.Collections.getReadingsCollection().find(docFind).sort(docSort).limit(1).iterator();
+        MongoCursor<Document> cursor = MongoDB.Collections.getReadingsCollection()
+                .find(docFind)
+                .sort(docSort)
+                .limit(1)
+                .iterator();
 
         ReadingEntity entity = null;
 
@@ -34,7 +78,11 @@ public class ReadingManager {
             return null;
         }
 
-        return ServerUtil.getReadingRpc(entity);
+        ReadingRPC rpc = ServerUtil.getReadingRpc(entity);
+
+        rpc.signal = getSignal(rpc.id);
+
+        return rpc;
     }
 
     public List<ReadingRPC> getLastReadings(Integer id, int hours) {
@@ -94,6 +142,10 @@ public class ReadingManager {
             }
         } finally {
             cursor.close();
+        }
+
+        for (ReadingRPC rpc : rpcs) {
+            rpc.signal = getSignal(rpc.id);
         }
 
         return rpcs;

@@ -6,6 +6,7 @@ public class ReadingRPC extends AbstractRPC {
     public Double temperature;
     public Double humidity;
     public Integer voltage;
+    public Integer signal;
     public Long timestamp;
 
     @Override
@@ -15,6 +16,7 @@ public class ReadingRPC extends AbstractRPC {
                 ", temperature=" + temperature +
                 ", humidity=" + humidity +
                 ", voltage=" + voltage +
+                ", signal=" + signal +
                 ", timestamp=" + timestamp +
                 '}';
     }
