@@ -122,7 +122,7 @@ public class ReadingManager {
         return rpcs;
     }
 
-    public List<ReadingRPC> getReadingsSince(long lastTimestamp) {
+    public List<ReadingRPC> getReadingsSince(long lastTimestamp, boolean withSignal) {
         Document find = new Document("timestamp", new Document("$gt", lastTimestamp));
         Document sort = new Document("timestamp", 1);
 
@@ -144,8 +144,10 @@ public class ReadingManager {
             cursor.close();
         }
 
-        for (ReadingRPC rpc : rpcs) {
-            rpc.signal = getSignal(rpc.id);
+        if (withSignal) {
+            for (ReadingRPC rpc : rpcs) {
+                rpc.signal = getSignal(rpc.id);
+            }
         }
 
         return rpcs;

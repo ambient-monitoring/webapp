@@ -95,7 +95,7 @@ public class HumidityChart extends AbstractChart {
     }
 
     private void loadValues(long ts, final boolean animate) {
-        AmbientRPC.getReadingsSince(ts, new AsyncCallback<List<ReadingRPC>>() {
+        AmbientRPC.getReadingsSince(ts, false, new AsyncCallback<List<ReadingRPC>>() {
             @Override
             public void onFailure(Throwable throwable) {
 

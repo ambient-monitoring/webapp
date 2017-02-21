@@ -69,7 +69,7 @@ public class Overview extends SimplePanel {
 
             @Override
             public void run() {
-                AmbientRPC.getReadingsSince(lastTimestamp, new AsyncCallback<List<ReadingRPC>>() {
+                AmbientRPC.getReadingsSince(lastTimestamp, true, new AsyncCallback<List<ReadingRPC>>() {
                     @Override
                     public void onFailure(Throwable throwable) {
 

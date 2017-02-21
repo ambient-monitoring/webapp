@@ -35,8 +35,8 @@ public class AmbientServiceImpl extends RemoteServiceServlet implements AmbientS
 
 
     @Override
-    public List<ReadingRPC> getReadingsSince(long lastTimestamp) {
+    public List<ReadingRPC> getReadingsSince(long lastTimestamp, boolean withSignal) {
         ReadingManager manager = injector.getInstance(ReadingManager.class);
-        return manager.getReadingsSince(lastTimestamp);
+        return manager.getReadingsSince(lastTimestamp, withSignal);
     }
 }

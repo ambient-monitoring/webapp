@@ -18,7 +18,7 @@ public class AmbientRPC {
         service.getLastReadings(id, count, callback);
     }
 
-    public static void getReadingsSince(long lastTimestamp, AsyncCallback<List<ReadingRPC>> callback) {
-        service.getReadingsSince(lastTimestamp, callback);
+    public static void getReadingsSince(long lastTimestamp, boolean withSignal, AsyncCallback<List<ReadingRPC>> callback) {
+        service.getReadingsSince(lastTimestamp, withSignal, callback);
     }
 }

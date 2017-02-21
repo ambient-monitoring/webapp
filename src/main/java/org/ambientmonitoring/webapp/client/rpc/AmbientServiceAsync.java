@@ -11,5 +11,5 @@ public interface AmbientServiceAsync {
 
     void getLastReadings(Integer id, int count, AsyncCallback<List<ReadingRPC>> callback);
 
-    void getReadingsSince(long lastTimestamp, AsyncCallback<List<ReadingRPC>> callback);
+    void getReadingsSince(long lastTimestamp, boolean withSignal, AsyncCallback<List<ReadingRPC>> callback);
 }
