@@ -12,6 +12,7 @@ public class ReadingAdapter {
         entity.temperature = doc.getDouble("temperature");
         entity.humidity = doc.getDouble("humidity");
         entity.voltage = doc.getInteger("voltage");
+        entity.counter = doc.getInteger("counter");
         entity.timestamp = doc.getLong("timestamp");
 
         return entity;

@@ -6,6 +6,6 @@ public class ReadingEntity {
     public Double temperature;
     public Double humidity;
     public Integer voltage;
+    public Integer counter;
     public Long timestamp;
-
 }
