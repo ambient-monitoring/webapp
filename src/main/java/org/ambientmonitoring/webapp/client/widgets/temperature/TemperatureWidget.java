@@ -77,7 +77,7 @@ public class TemperatureWidget extends SimplePanel implements Sensor {
     }
 
     private void loadValues() {
-        AmbientRPC.getLastReading(sensorId, 1l, new AsyncCallback<ReadingRPC>() {
+        AmbientRPC.getLastReading(sensorId, new AsyncCallback<ReadingRPC>() {
             @Override
             public void onFailure(Throwable caught) {
 

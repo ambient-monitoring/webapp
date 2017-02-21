@@ -52,7 +52,7 @@ public class ReadingManager {
         return signal;
     }
 
-    public ReadingRPC getLastReading(Integer id, long lastTimestamp) {
+    public ReadingRPC getLastReading(Integer id) {
         Document docFind = new Document("id", id);
         Document docSort = new Document("timestamp", -1);
 

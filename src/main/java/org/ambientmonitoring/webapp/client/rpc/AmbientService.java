@@ -12,7 +12,7 @@ import java.util.List;
 @RemoteServiceRelativePath("rpc")
 public interface AmbientService extends RemoteService {
 
-    ReadingRPC getLastReading(Integer id, long lastTimestamp);
+    ReadingRPC getLastReading(Integer id);
 
     List<ReadingRPC> getLastReadings(Integer id, int count);
 

@@ -10,8 +10,8 @@ public class AmbientRPC {
 
     private static final AmbientServiceAsync service = GWT.create(AmbientService.class);
 
-    public static void getLastReading(Integer id, long lastTimestamp, AsyncCallback<ReadingRPC> callback) {
-        service.getLastReading(id, lastTimestamp, callback);
+    public static void getLastReading(Integer id, AsyncCallback<ReadingRPC> callback) {
+        service.getLastReading(id, callback);
     }
 
     public static void getLastReadings(Integer id, int count, AsyncCallback<List<ReadingRPC>> callback) {
